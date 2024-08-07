@@ -8,7 +8,7 @@ import animationImg from './assets/Animation/Animation.webm';
 
 const Home = () => {
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleActivate = () => {
     navigate('/voice-chat'); // Navigate to VoiceChat component
