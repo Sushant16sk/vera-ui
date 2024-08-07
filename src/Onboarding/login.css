@@ -1,0 +1,57 @@
+.background {
+    background: url("C:/Users/SushantKumar/Downloads/DALL·E 2024-08-07 12.35.45 - A blurred background image featuring a person holding a microphone, with soft, out-of-focus city lights in the background. The colors should be cool a.webp") no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mic-icon {
+    background-color: #add8e6;
+    border-radius: 50%;
+    padding: 10px;
+    margin-left: 0.5rem;
+  }
+  
+  .shadow-lg {
+    border-radius: 10px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .form-control {
+    padding-left: 40px;
+  }
+  
+  .form-group {
+    position: relative;
+  }
+  
+  .form-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
