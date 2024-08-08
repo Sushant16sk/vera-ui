@@ -41,19 +41,20 @@
 }
 
 .home-content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
     text-align: center;
+}
+
+.animation-wrapper {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Centers the wrapper horizontally */
   }
   
-  .animation-wrapper {
-    position: absolute;
-    top: 20px; /* Adjust based on your layout */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: auto; /* Adjust based on your animation */
-    z-index: 1;
-  }
 .intro-text {
     max-width: 500px;
     margin: 0 auto;
@@ -65,43 +66,134 @@
     display: flex;
     min-height: 85vh;
     width: 100%;
-  }
-  
-  .left-panel {
-    width: 30%;
+}
+
+.left-panel {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    border-radius: 10px;
-    margin-right: 20px;
+    justify-content: center;
+    width: 30%;
   }
-  
+
   .right-panel {
     width: 70%;
     padding: 20px;
-    background-color: #d3d3d3; 
+    background-color: #d3d3d3;
     border-radius: 10px;
-  }
-  
-  .mic-button {
+}
+
+.right-panel.show-animation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation {
+    position: absolute;
+    width: 150px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-panel {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mic-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.right-panel {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px 2px 20px 20px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-header-left {
+    display: flex;
+    align-items: center;
+}
+
+.animation-circle {
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%;
+    overflow: hidden; 
+    background-color: aquamarine;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; 
+}
+
+.chat-header-right h2 {
+    margin: 0;
+}
+
+.voice-chats {
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.mic-button {
     background: none;
     border: none;
     padding: 0;
-  }
-  
-  .mic-icon {
-    width: 200px;
+}
+
+.mic-icon {
+    width: 10vw; /* Adjust this percentage as needed */
     height: auto;
-  }
+    max-width: 100%; /* Ensure it doesn't overflow its container */
+}
+
 
 .full-width-wrapper {
     width: 100%;
-    padding: 0; 
-    margin: 0; 
-  }
+    padding: 0;
+    margin: 0;
+}
 
-  .full-width-wrapper > * {
+.full-width-wrapper>* {
     width: 100%;
     margin: 0;
+}
+
+.mic-button.recording .mic-icon {
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
   

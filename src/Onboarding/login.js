@@ -32,7 +32,7 @@ const LoginSignup = () => {
                 <img
                   src={micImg}
                   alt="Mic Icon"
-                  className="mic-icon"
+                  className="loginIcon"
                 />
               </div>
               <Form>
