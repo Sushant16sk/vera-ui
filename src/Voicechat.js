@@ -43,6 +43,7 @@ const VoiceChat = () => {
     }, [recording]);
 
     useEffect(() => {
+        // Retrieve the audio URL from local storage when the component mounts
         const storedAudioUrl = localStorage.getItem('audioUrl');
         if (storedAudioUrl) {
             setAudioUrl(storedAudioUrl);
@@ -121,40 +122,9 @@ const VoiceChat = () => {
         }
     };
 
-    // const handleMicClick = () => {
-    //     setClickCount(1);
-    //     setRecording(!recording);
-    // };
-
     const handleMicClick = () => {
         setClickCount(1);
-        if (recording) {
-            // Stop recording
-            mediaRecorderRef.current.stop();
-        } else {
-            // Start recording
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    mediaRecorderRef.current = new MediaRecorder(stream);
-                    mediaRecorderRef.current.start();
-
-                    mediaRecorderRef.current.ondataavailable = event => {
-                        audioChunksRef.current.push(event.data);
-                    };
-
-                    mediaRecorderRef.current.onstop = () => {
-                        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/mp3' });
-                        const audioUrl = URL.createObjectURL(audioBlob);
-                        setAudioUrl(audioUrl);
-                        audioChunksRef.current = []; // Reset the chunks array
-                    };
-
-                    setRecording(true);
-                })
-                .catch(error => {
-                    console.error('Error accessing microphone:', error);
-                });
-        }
+        setRecording(!recording);
     };
 
     return (
