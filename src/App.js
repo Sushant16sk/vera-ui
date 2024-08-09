@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import LoginSignup from './Onboarding/login';
 import Home from './Home';
 import Layout from './Layout';
@@ -13,12 +13,13 @@ function App() {
   return (
     <ThemeProvider>
         <Routes>
-          <Route path="/" element={<LoginSignup />} />
+          <Route path="/login" element={<LoginSignup />} />
           <Route path="/" element={<Layout />}>
-            <Route path="home" element={<Home />} />
+            <Route index path="home" element={<Home />} />
             <Route path="voice-chat" element={<Voicechat />} />
             <Route path="history" element={<History />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="/" element={<Navigate to="home" />} />
           </Route>
         </Routes>
     </ThemeProvider>
