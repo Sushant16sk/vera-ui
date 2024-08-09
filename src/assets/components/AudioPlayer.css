@@ -1,11 +1,14 @@
+/* AudioPlayer.css */
+
 .chat-bubble {
-  background-color: #ececec;
-  border-radius: 25px 25px 25px 3px;
-  padding: 10px 15px;
-  max-width: 35%;
-  margin: 5px 0;
+  background-color: #f4f4f8;
+  border-radius: 3px 25px 25px 25px;
+  padding: 12px 20px;
+  max-width: 40%;
+  margin: 8px 0;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .audio-player {
@@ -18,37 +21,57 @@
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 12px;
 }
 
 .play-pause-button {
   cursor: pointer;
-  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.play-pause-button:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.play-pause-button svg {
+  width: 20px;
+  height: 20px;
+  fill: #6c6c6c;
 }
 
 .progress-container {
   display: flex;
   align-items: center;
-  width: 100%;
+  flex: 1;
 }
 
 .progress-bar {
-  background-color: #dcdcdc;
-  border-radius: 10px;
-  height: 5px;
+  background-color: #d3d3d3;
+  border-radius: 8px;
+  height: 6px;
   width: 100%;
   position: relative;
   overflow: hidden;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .progress {
-  background-color: #4caf50;
   height: 100%;
   width: 0;
-  transition: width 0.2s;
+  transition: width 0.4s ease;
 }
 
 .duration {
-  font-size: 12px;
-  color: #555;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
 }

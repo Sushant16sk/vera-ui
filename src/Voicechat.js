@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from 'react-bootstrap';
 import micImg from './assets/images/image.png';
 import Lottie from 'react-lottie';
@@ -15,8 +15,9 @@ const VoiceChat = () => {
     const [audioContext, setAudioContext] = useState(null);
     const [analyser, setAnalyser] = useState(null);
     const [silenceTimer, setSilenceTimer] = useState(null);
-    const [animationPaused, setAnimationPaused] = useState(true);
     const [clickCount, setClickCount] = useState(0);
+    const mediaRecorderRef = useRef(null);
+    const audioChunksRef = useRef([]);
 
     const defaultOptions = {
         loop: true,
@@ -30,12 +31,8 @@ const VoiceChat = () => {
     useEffect(() => {
         if (recording) {
             startRecording();
-            setAnimationPaused(false);
-            setClickCount(1);
         } else {
             stopRecording();
-            setAnimationPaused(true);
-            setClickCount(0);
         }
 
         return () => {
@@ -46,16 +43,11 @@ const VoiceChat = () => {
     }, [recording]);
 
     useEffect(() => {
-        // Force reflow to trigger the animation
-        if (clickCount === 0) {
-            const animationElement = document.querySelector('.animation');
-            if (animationElement) {
-                animationElement.classList.remove('animation');
-                void animationElement.offsetWidth; // Trigger reflow
-                animationElement.classList.add('animation');
-            }
+        const storedAudioUrl = localStorage.getItem('audioUrl');
+        if (storedAudioUrl) {
+            setAudioUrl(storedAudioUrl);
         }
-    }, [clickCount]);
+    }, []);
 
     const startRecording = () => {
         navigator.mediaDevices.getUserMedia({ audio: true })
@@ -68,7 +60,7 @@ const VoiceChat = () => {
                 setAudioContext(context);
                 setAnalyser(analyserNode);
 
-                const recorder = new MediaRecorder(stream, { mimeType: 'audio/wav' });
+                const recorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
                 setMediaRecorder(recorder);
 
                 recorder.ondataavailable = event => {
@@ -76,9 +68,11 @@ const VoiceChat = () => {
                 };
 
                 recorder.onstop = () => {
-                    const blob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const blob = new Blob(audioChunks, { type: 'audio/mp3' });
                     setAudioBlob(blob);
-                    setAudioUrl(URL.createObjectURL(blob));
+                    const url = URL.createObjectURL(blob);
+                    setAudioUrl(url);
+                    localStorage.setItem('audioUrl', url); // Save the URL in local storage
                     setAudioChunks([]);
                     analyserNode.disconnect();
                     context.close();
@@ -127,8 +121,40 @@ const VoiceChat = () => {
         }
     };
 
+    // const handleMicClick = () => {
+    //     setClickCount(1);
+    //     setRecording(!recording);
+    // };
+
     const handleMicClick = () => {
-        setRecording(!recording);
+        setClickCount(1);
+        if (recording) {
+            // Stop recording
+            mediaRecorderRef.current.stop();
+        } else {
+            // Start recording
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    mediaRecorderRef.current = new MediaRecorder(stream);
+                    mediaRecorderRef.current.start();
+
+                    mediaRecorderRef.current.ondataavailable = event => {
+                        audioChunksRef.current.push(event.data);
+                    };
+
+                    mediaRecorderRef.current.onstop = () => {
+                        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/mp3' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        setAudioUrl(audioUrl);
+                        audioChunksRef.current = []; // Reset the chunks array
+                    };
+
+                    setRecording(true);
+                })
+                .catch(error => {
+                    console.error('Error accessing microphone:', error);
+                });
+        }
     };
 
     return (
@@ -163,7 +189,17 @@ const VoiceChat = () => {
                             </div>
                         </div>
                         <div className="voice-chats">
-                            {audioUrl && <AudioPlayer audioUrl={audioUrl} />}
+                            <div className='d-flex align-items-center gap-2'>
+                                {/* <div className="animation-circle">
+                                    <Lottie
+                                        options={defaultOptions}
+                                        style={{ height: '185%', width: '100%' }}
+                                    />
+                                </div> */}
+                                <div className='w-100'>
+                                    <AudioPlayer audioUrl="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+                                </div>
+                            </div>
                         </div>
                     </>
                 )}
