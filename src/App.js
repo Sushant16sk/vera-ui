@@ -7,18 +7,21 @@ import Layout from './Layout';
 import History from './history';
 import Settings from './settings';
 import Voicechat from './Voicechat'; 
+import { ThemeProvider } from './assets/components/ThemeContext';
 
 function App() {
   return (
-    <Routes>
-        <Route path="/" element={<LoginSignup />} />
-        <Route path="/" element={<Layout />}>
-          <Route index path="home" element={<Home />} />
-          <Route path="voice-chat" element={<Voicechat />} /> 
-          <Route path="history" element={<History />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-      </Routes>
+    <ThemeProvider>
+        <Routes>
+          <Route path="/" element={<LoginSignup />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="home" element={<Home />} />
+            <Route path="voice-chat" element={<Voicechat />} />
+            <Route path="history" element={<History />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+    </ThemeProvider>
   );
 }
 

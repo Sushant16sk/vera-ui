@@ -3,15 +3,32 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import micImg from './assets/images/image.png';
 import { Outlet } from 'react-router-dom';
 import './style.css';
+import animationData from './assets/Animation/Animation.json';
+import Lottie from 'react-lottie';
 
 const Layout = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
   return (
     <div className="layout-container">
       <Navbar bg="light" expand="lg" className="custom-navbar">
         <Container>
           <Navbar.Brand href="#home">
-            <img src={micImg} alt="Mic Icon" className="navbar-icon" />
-            VERA
+            <div className="d-flex align-items-center">
+              <div className="animation-circle" style={{ marginRight: '10px' }}>
+                <Lottie
+                  options={defaultOptions}
+                  style={{ height: '185%', width: '100%' }}
+                />
+              </div>
+              <span style={{ fontWeight: '600', fontSize: '1.25rem' }}>VERA</span>
+            </div>
           </Navbar.Brand>
           <Nav className="ms-auto">
             <Nav.Link href="/home">Home</Nav.Link>

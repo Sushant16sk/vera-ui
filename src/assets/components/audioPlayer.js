@@ -4,13 +4,17 @@ import './AudioPlayer.css';
 const AudioPlayer = ({ audioUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
 
   useEffect(() => {
     if (isPlaying) {
       const interval = setInterval(() => {
-        const duration = audioRef.current.duration;
         const currentTime = audioRef.current.currentTime;
+        setCurrentTime(currentTime);
+        const duration = audioRef.current.duration;
+        setDuration(duration);
         setProgress((currentTime / duration) * 100);
       }, 1000);
 
@@ -25,6 +29,12 @@ const AudioPlayer = ({ audioUrl }) => {
       audioRef.current.play();
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   return (
@@ -52,10 +62,10 @@ const AudioPlayer = ({ audioUrl }) => {
             )}
           </div>
           <div className="progress-container">
-            <div className="progress-bar">
-              <div className="progress" style={{ width: `${progress}%` }}></div>
+            <div className="progress-bar" style={{ background:'#d3d3d3' }}>
+              <div className="progress" style={{ width: `${progress}%`, background:'black' }}></div>
             </div>
-            <span className="duration">{audioRef.current?.duration ? Math.floor(audioRef.current.duration) : '0'}s</span>
+            <span className="duration">{formatTime(currentTime)} / {formatTime(duration)}</span>
           </div>
         </div>
       </div>
