@@ -258,3 +258,156 @@
     transform: translateX(26px);
   }
   
+  .chat-name {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .chat-name-input {
+    font-size: 1.5rem;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    padding: 5px;
+    width: 100%;
+  }
+  
+  .edit-icon {
+    margin-left: 15px;
+    font-size: 1.5rem;
+    color: #666;
+  }
+  
+  .edit-icon:hover {
+    color: #000;
+  }
+  .history-page {
+    padding: 20px;
+    background-color: #f4f4f8;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .clear-history-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .clear-history-button:hover {
+    background-color: #e64444;
+  }
+  
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .history-item {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .history-item:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .chat-details {
+    margin-bottom: 10px;
+  }
+  
+  .chat-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+  }
+  
+  .chat-created,
+  .chat-last-executed {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .history-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .rechat-button,
+  .delete-button {
+    background-color: #5c9a41;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+  }
+  
+  .rechat-button:hover {
+    background-color: #4d8236;
+  }
+  
+  .delete-button:hover {
+    background-color: #e64444;
+  }
+  
+  @media (max-width: 768px) {
+    .history-page {
+      padding: 15px;
+    }
+  
+    .history-item {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px;
+    }
+  
+    .history-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  
+    .clear-history-button {
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+  
+    .rechat-button,
+    .delete-button {
+      padding: 6px 15px;
+      font-size: 12px;
+    }
+  }
+  

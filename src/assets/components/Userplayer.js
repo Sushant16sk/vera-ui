@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './AudioPlayer.css';
+import './userplayer.css';
 
-const AudioPlayer = ({ audioUrl }) => {
+const UserPlayer = ({ audioUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -60,7 +60,7 @@ const AudioPlayer = ({ audioUrl }) => {
   };
 
   return (
-    <div className="chat-bubble">
+    <div className="user-bubble">
       <div className="audio-player">
         <audio
           ref={audioRef}
@@ -104,4 +104,4 @@ const AudioPlayer = ({ audioUrl }) => {
   );
 };
 
-export default AudioPlayer;
+export default UserPlayer;

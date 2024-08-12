@@ -5,11 +5,14 @@ import Lottie from 'react-lottie';
 import animationData from './assets/Animation/Animation.json';
 import AudioPlayer from './assets/components/audioPlayer';
 import './style.css';
+import UserPlayer from './assets/components/Userplayer';
 
 const VoiceChat = () => {
     const [recording, setRecording] = useState(false);
     const [audioBlob, setAudioBlob] = useState(null);
     const [audioUrl, setAudioUrl] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+    const [chatName, setChatName] = useState('VERA');
     const [mediaRecorder, setMediaRecorder] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audioContext, setAudioContext] = useState(null);
@@ -127,6 +130,30 @@ const VoiceChat = () => {
         setRecording(!recording);
     };
 
+    const handleDoubleClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleBlur = () => {
+        if (chatName.trim() === '') {
+            setChatName('VERA');
+        }
+        setIsEditing(false);
+    };
+
+    const handleChange = (e) => {
+        setChatName(e.target.value);
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            if (chatName.trim() === '') {
+                setChatName('VERA');
+            }
+            setIsEditing(false);
+        }
+    };
+
     return (
         <div className="voice-chat-container">
             <div className="left-panel">
@@ -155,7 +182,21 @@ const VoiceChat = () => {
                                 </div>
                             </div>
                             <div className="chat-header-right">
-                                <h1>VERA</h1>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        value={chatName}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        onKeyDown={handleKeyDown}
+                                        autoFocus
+                                        className="chat-name-input"
+                                    />
+                                ) : (
+                                    <h1 onDoubleClick={handleDoubleClick} className="chat-name">
+                                        {chatName} <i className="fa fa-pencil edit-icon" aria-hidden="true" onClick={handleDoubleClick}></i>
+                                    </h1>
+                                )}
                             </div>
                         </div>
                         <div className="voice-chats">
@@ -168,6 +209,11 @@ const VoiceChat = () => {
                                 </div> */}
                                 <div className='w-100'>
                                     <AudioPlayer audioUrl="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+                                </div>
+                            </div>
+                            <div className='d-flex align-items-center gap-2'>
+                                <div className='d-flex justify-content-end w-100'>
+                                    <UserPlayer audioUrl="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
                                 </div>
                             </div>
                         </div>
