@@ -32,7 +32,8 @@ const Layout = () => {
           </Navbar.Brand>
           <Nav className="ms-auto">
             <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/history">Chat History</Nav.Link>
+            <Nav.Link href="/voice-chat">Chat</Nav.Link>
+            <Nav.Link href="/history">History</Nav.Link>
             <Nav.Link href="/settings">Settings</Nav.Link>
           </Nav>
         </Container>
